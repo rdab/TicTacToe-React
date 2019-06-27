@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Header from "./Header.jsx";
 
 const PlayerX = "Player 1 - Xs";
 const Player0 = "Player 2 - 0s";
@@ -29,7 +30,7 @@ class App extends React.Component {
     })
     return (
       <div>
-        <header>{text}</header>
+        <Header text={text} />
         {board}
       </div>
     )
