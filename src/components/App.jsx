@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import '../assets/styles/App.css';
 import Header from "./Header";
 import Board  from "./Board";
+import MovesCounter from "./MovesCounter";
 
 const PlayerX = "Player 1 - Xs";
 const Player0 = "Player 2 - 0s";
@@ -50,6 +51,7 @@ class App extends React.Component {
         <section id="TicTacToe">
           <Header text={text} />
           <Board appClick={this.appClick} values={this.state.values} />
+          <MovesCounter />
         </section>
       </Container>
     )
