@@ -12,7 +12,9 @@ class Square extends React.Component {
   }
 
   squareClick(row, column){
-    this.props.boardClick(row, column);
+    if (this.props.value === '-'){
+      this.props.boardClick(row, column);
+    }
   }
   
   render() {
