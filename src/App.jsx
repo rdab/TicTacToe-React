@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Header from "./Header.jsx";
+import { Board } from "./Board";
 
 const PlayerX = "Player 1 - Xs";
 const Player0 = "Player 2 - 0s";
