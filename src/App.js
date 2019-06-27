@@ -2,25 +2,38 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const PlayerX = "Player 1 - Xs";
+const Player0 = "Player 2 - 0s";
+
+class App extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      turn: PlayerX,
+      values: [
+        ["-","-","X"],
+        ["-","0","-"],
+        ["-","-","-"]
+      ]
+    }
+  }
+
+  render() {
+    let text = "Turn of " + this.state.turn;
+    let board = this.state.values.map((rowValues, rowIndex)=>{
+      let row = rowValues.map((value, columnIndex)=>{
+        return(<span>{value}</span>);
+      })
+      return (<div>{row}</div>);
+    })
+    return (
+      <div>
+        <header>{text}</header>
+        {board}
+      </div>
+    )
+  }
 }
 
 export default App;
