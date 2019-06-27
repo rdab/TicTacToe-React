@@ -18,6 +18,11 @@ class App extends React.Component {
         ["-","-","-"]
       ]
     }
+    this.appClick = this.appClick.bind(this);
+  }
+
+  appClick(row, column){
+    console.log(`Square Click ${row} ${column}`);
   }
 
   render() {
@@ -25,7 +30,7 @@ class App extends React.Component {
     return (
       <div>
         <Header text={text} />
-        <Board values={this.state.values} />
+        <Board appClick={this.appClick} values={this.state.values} />
       </div>
     )
   }

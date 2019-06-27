@@ -6,9 +6,21 @@ const squareStyle = {
 }
 
 class Square extends React.Component {
+  constructor(props){
+    super(props);
+    this.squareClick = this.squareClick.bind(this);
+  }
+
+  squareClick(row, column){
+    this.props.boardClick(row, column);
+  }
+  
   render() {
     return (
-      <button style={squareStyle}>{this.props.value}</button>
+      <button style={squareStyle} 
+        onClick={()=>this.squareClick(this.props.rowIndex, this.props.columnIndex)} >
+          {this.props.value}
+      </button>
     );
   }
 }
