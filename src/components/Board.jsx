@@ -33,7 +33,9 @@ class Board extends React.Component {
       );
     })
     return (
-        [board]
+      <div className="m-1">
+        {board}
+      </div>
       );
   }
 }

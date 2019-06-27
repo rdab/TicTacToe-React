@@ -17,11 +17,13 @@ class App extends React.Component {
     this.state = {
       turn: PlayerX,
       values: [
-        ["-","-","X"],
-        ["-","0","-"],
+        ["-","-","-"],
+        ["-","-","-"],
         ["-","-","-"]
-      ]
+      ],
+      plays: 0,
     }
+
     this.appClick = this.appClick.bind(this);
   }
 
@@ -29,9 +31,11 @@ class App extends React.Component {
     console.log(`Square Click ${row} ${column}`);
     let newValues = JSON.parse(JSON.stringify(this.state.values));
     newValues[row][column] = this.state.turn === PlayerX ? 'X' : '0';
+    let plays = this.state.plays + 1;
     this.setState({
       turn: this.state.turn === PlayerX ? Player0 : PlayerX,
       values: newValues,
+      plays: plays,
     })
   }
 
@@ -51,7 +55,7 @@ class App extends React.Component {
         <section id="TicTacToe">
           <Header text={text} />
           <Board appClick={this.appClick} values={this.state.values} />
-          <MovesCounter />
+          <MovesCounter plays={this.state.plays} />
         </section>
       </Container>
     )

@@ -4,7 +4,15 @@ import Col from "react-bootstrap/Col";
 
 class MovesCounter extends React.Component {
   render() {
-    return (5);
+    return (
+      <Row className="text-center m-2">
+        <Col>
+          <p>
+            <strong>Number of Movements: {this.props.plays}</strong>
+          </p>
+        </Col>
+      </Row>
+    );
   }
 }
 
