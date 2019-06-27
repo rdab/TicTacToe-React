@@ -1,4 +1,6 @@
 import React from "react";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Square from "./Square";
 
 class Board extends React.Component {
@@ -15,16 +17,24 @@ class Board extends React.Component {
     let board = this.props.values.map((rowValues, rowIndex)=>{
       let row = rowValues.map((value, columnIndex)=>{
         return(
-          <Square rowIndex={rowIndex} 
-            columnIndex={columnIndex} 
-            boardClick={this.boardClick} 
-            key={"".concat(rowIndex, columnIndex)} 
-            value={value}/>
+          <Col className="p-0 m-0" xs="auto">
+            <Square rowIndex={rowIndex} columnIndex={columnIndex}
+              boardClick={this.boardClick}
+              key={"".concat(rowIndex, columnIndex)}
+              value={value}/>
+          </Col>
         );
       })
-      return (<div key={"row".concat(rowIndex)}>{row}</div>);
+      return(
+        <Row className="justify-content-center flex-nowrap"
+             key={"row".concat(rowIndex)}>
+          {row}
+        </Row>
+      );
     })
-    return (<div>{board}</div>);
+    return (
+        [board]
+      );
   }
 }
 

@@ -1,4 +1,7 @@
 import React from 'react';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import '../assets/styles/App.css';
 import Header from "./Header";
 import Board  from "./Board";
@@ -34,10 +37,21 @@ class App extends React.Component {
   render() {
     let text = "Turn of " + this.state.turn;
     return (
-      <div>
-        <Header text={text} />
-        <Board appClick={this.appClick} values={this.state.values} />
-      </div>
+      <Container>
+        <header className="mt-3 mb-3">
+          <Row className="text-center">
+            <Col>
+              <h1>
+                Welcome to Tic Tac Toe!
+              </h1>
+            </Col>
+          </Row>
+        </header>
+        <section id="TicTacToe">
+          <Header text={text} />
+          <Board appClick={this.appClick} values={this.state.values} />
+        </section>
+      </Container>
     )
   }
 }
