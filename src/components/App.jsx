@@ -23,6 +23,12 @@ class App extends React.Component {
 
   appClick(row, column){
     console.log(`Square Click ${row} ${column}`);
+    let newValues = JSON.parse(JSON.stringify(this.state.values));
+    newValues[row][column] = this.state.turn === PlayerX ? 'X' : '0';
+    this.setState({
+      turn: this.state.turn === PlayerX ? Player0 : PlayerX,
+      values: newValues,
+    })
   }
 
   render() {
