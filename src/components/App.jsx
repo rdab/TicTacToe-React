@@ -23,6 +23,32 @@ function getNewState(){
   };
 };
 
+function detectWinner(state) {
+  if (state.plays < 5) { return null }
+  let winMatrix = [
+    [[0, 0], [0, 1], [0, 2]],
+    [[1, 0], [1, 1], [1, 2]],
+    [[2, 0], [2, 1], [2, 2]],
+    [[0, 0], [1, 0], [2, 0]],
+    [[0, 0], [1, 0], [2, 0]],
+    [[0, 1], [1, 1], [2, 1]],
+    [[0, 2], [1, 2], [2, 2]],
+    [[0, 0], [1, 1], [2, 2]],
+    [[0, 2], [1, 1], [2, 0]],
+  ]
+  for (let condition of winMatrix) {
+    let values = condition.map((point)=>{
+      return state.values[point[0]][point[1]];
+    });
+    if (values.some((e) => e === '-')){ return null }
+
+    let val = values.filter((prev, curr)=>{ 
+      return prev === curr ? curr : false;
+    });
+    return val === 'X' ? PlayerX : Player0;
+  }
+}
+
 class App extends React.Component {
   constructor(props){
     super(props);
