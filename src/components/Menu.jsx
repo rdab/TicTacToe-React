@@ -4,7 +4,13 @@ import Col from "react-bootstrap/Col";
 
 class Menu extends React.Component {
   render() {
-    return ('');
+    return (
+      <Row>
+        <Col>
+          <button>Reset</button>
+        </Col>
+      </Row>
+    );
   }
 }
 
