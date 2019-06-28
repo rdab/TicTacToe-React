@@ -19,7 +19,6 @@ function getNewState(){
       ["-","-","-"],
       ["-","-","-"]
     ],
-    plays: 0,
   };
 };
 
@@ -62,16 +61,24 @@ class App extends React.Component {
     console.log(`Square Click ${row} ${column}`);
     let newValues = JSON.parse(JSON.stringify(this.state.values));
     newValues[row][column] = this.state.turn === PlayerX ? 'X' : '0';
-    let plays = this.state.plays + 1;
     this.setState({
       turn: this.state.turn === PlayerX ? Player0 : PlayerX,
       values: newValues,
-      plays: plays,
     });
   }
 
   reset(){
     this.setState(getNewState());
+  }
+
+  countPlays(values){
+    let counter = 0;
+    for (let row of values){
+      counter = row.reduce((accumulator, value)=>{
+        return value !== '-' ? accumulator+1 : accumulator
+      }, counter);
+    }
+    return counter;
   }
 
   render() {
@@ -90,7 +97,7 @@ class App extends React.Component {
         <section id="TicTacToe">
           <Header text={text} />
           <Board appClick={this.appClick} values={this.state.values} />
-          <MovesCounter plays={this.state.plays} />
+          <MovesCounter plays={this.countPlays(this.state.values)} />
           <Menu reset={this.reset}/>
         </section>
       </Container>
