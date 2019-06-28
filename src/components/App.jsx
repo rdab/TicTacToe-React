@@ -8,6 +8,7 @@ import Board from "./Board";
 import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
+import { connect } from "react-redux";
 
 const PlayerX = "Player 1 - Xs";
 const Player0 = "Player 2 - 0s";
@@ -120,4 +121,11 @@ class App extends React.Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    values: state.values,
+    turn: state.turn,
+  }
+}
+
+export default connect(mapStateToProps)(App);
