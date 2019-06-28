@@ -11,21 +11,25 @@ import Menu from './Menu';
 const PlayerX = "Player 1 - Xs";
 const Player0 = "Player 2 - 0s";
 
-class App extends React.Component {
+function getNewState(){
+  return {
+    turn: PlayerX,
+    values: [
+      ["-","-","-"],
+      ["-","-","-"],
+      ["-","-","-"]
+    ],
+    plays: 0,
+  };
+};
 
+class App extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      turn: PlayerX,
-      values: [
-        ["-","-","-"],
-        ["-","-","-"],
-        ["-","-","-"]
-      ],
-      plays: 0,
-    }
+    this.state = getNewState();
 
     this.appClick = this.appClick.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   appClick(row, column){
@@ -37,7 +41,11 @@ class App extends React.Component {
       turn: this.state.turn === PlayerX ? Player0 : PlayerX,
       values: newValues,
       plays: plays,
-    })
+    });
+  }
+
+  reset(){
+    this.setState(getNewState());
   }
 
   render() {
@@ -57,7 +65,7 @@ class App extends React.Component {
           <Header text={text} />
           <Board appClick={this.appClick} values={this.state.values} />
           <MovesCounter plays={this.state.plays} />
-          <Menu />
+          <Menu reset={this.reset}/>
         </section>
       </Container>
     )
