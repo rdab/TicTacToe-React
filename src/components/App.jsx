@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import '../assets/styles/App.css';
 import Header from "./Header";
-import Board  from "./Board";
+import Board from "./Board";
 import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
@@ -12,47 +12,19 @@ import { isNullOrUndefined } from 'util';
 const PlayerX = "Player 1 - Xs";
 const Player0 = "Player 2 - 0s";
 
-function getNewState(){
+function getNewState() {
   return {
     turn: PlayerX,
     values: [
-      ["-","-","-"],
-      ["-","-","-"],
-      ["-","-","-"]
+      ["-", "-", "-"],
+      ["-", "-", "-"],
+      ["-", "-", "-"]
     ],
   };
 };
 
-function detectWinner(state) {
-  let winMatrix = [
-    [[0, 0], [0, 1], [0, 2]],
-    [[1, 0], [1, 1], [1, 2]],
-    [[2, 0], [2, 1], [2, 2]],
-    [[0, 0], [1, 0], [2, 0]],
-    [[0, 0], [1, 0], [2, 0]],
-    [[0, 1], [1, 1], [2, 1]],
-    [[0, 2], [1, 2], [2, 2]],
-    [[0, 0], [1, 1], [2, 2]],
-    [[0, 2], [1, 1], [2, 0]],
-  ]
-  for (let condition of winMatrix) {
-    let values = condition.map((point)=>{
-      return state.values[point[0]][point[1]];
-    });
-    if (values.some((val) => val === '-')){ continue }
-
-    let val = values.reduce((prev, curr)=>{ 
-      return prev === curr ? curr : false;
-    });
-    if (val) {
-      return val === 'X' ? PlayerX : Player0;
-    }
-  }
-  return null;
-}
-
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = getNewState();
 
@@ -60,7 +32,7 @@ class App extends React.Component {
     this.reset = this.reset.bind(this);
   }
 
-  appClick(row, column){
+  appClick(row, column) {
     console.log(`Square Click ${row} ${column}`);
     let newValues = JSON.parse(JSON.stringify(this.state.values));
     newValues[row][column] = this.state.turn === PlayerX ? 'X' : '0';
@@ -70,29 +42,60 @@ class App extends React.Component {
     });
   }
 
-  reset(){
+  reset() {
     this.setState(getNewState());
   }
 
-  countPlays(values){
+  countPlays(values) {
     let counter = 0;
-    for (let row of values){
-      counter = row.reduce((accumulator, value)=>{
-        return value !== '-' ? accumulator+1 : accumulator
+    for (let row of values) {
+      counter = row.reduce((accumulator, value) => {
+        return value !== '-' ? accumulator + 1 : accumulator
       }, counter);
     }
     return counter;
   }
 
+  detectWinner(matrix) {
+    if (this.countPlays(matrix) < 5) {
+      return null;
+    }
+    let winMatrix = [
+      [[0, 0], [0, 1], [0, 2]],
+      [[1, 0], [1, 1], [1, 2]],
+      [[2, 0], [2, 1], [2, 2]],
+      [[0, 0], [1, 0], [2, 0]],
+      [[0, 0], [1, 0], [2, 0]],
+      [[0, 1], [1, 1], [2, 1]],
+      [[0, 2], [1, 2], [2, 2]],
+      [[0, 0], [1, 1], [2, 2]],
+      [[0, 2], [1, 1], [2, 0]],
+    ]
+    for (let condition of winMatrix) {
+      let values = condition.map((point) => {
+        return matrix[point[0]][point[1]];
+      });
+      if (values.some((val) => val === '-')) { continue }
+
+      let val = values.reduce((prev, curr) => {
+        return prev === curr ? curr : false;
+      });
+      if (val) {
+        return val === 'X' ? PlayerX : Player0;
+      }
+    }
+    return null;
+  }
+
   render() {
-    let winner = detectWinner(this.state);
+    let winner = this.detectWinner(this.state.values);
     let plays = this.countPlays(this.state.values);
     let text = "";
-    if (winner){
+    if (winner) {
       text = `The winner is ${winner}`;
     } else if (plays === 9) {
-      text = "Draw! Play again"  
-    }else{
+      text = "Draw! Play again"
+    } else {
       text = `Turn of ${this.state.turn}`;
     }
     return (
@@ -110,7 +113,7 @@ class App extends React.Component {
           <Header text={text} />
           <Board appClick={this.appClick} disabled={!isNullOrUndefined(winner)} values={this.state.values} />
           <MovesCounter plays={this.countPlays(this.state.values)} />
-          <Menu reset={this.reset}/>
+          <Menu reset={this.reset} />
         </section>
       </Container>
     )
