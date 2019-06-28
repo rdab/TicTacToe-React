@@ -1,4 +1,4 @@
-import { PlayerX, Player0 }  from "../constants/constants";
+import { PlayerX, Player0 }  from "../../constants";
 
 function turnReducer(state = PlayerX, action) {
   switch (action.type) {

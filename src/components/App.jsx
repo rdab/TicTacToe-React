@@ -27,7 +27,6 @@ function getNewState() {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = getNewState();
 
     this.appClick = this.appClick.bind(this);
     this.reset = this.reset.bind(this);
@@ -35,10 +34,10 @@ class App extends React.Component {
 
   appClick(row, column) {
     console.log(`Square Click ${row} ${column}`);
-    let newValues = JSON.parse(JSON.stringify(this.state.values));
-    newValues[row][column] = this.state.turn === PlayerX ? 'X' : '0';
+    let newValues = JSON.parse(JSON.stringify(this.props.values));
+    newValues[row][column] = this.props.turn === PlayerX ? 'X' : '0';
     this.setState({
-      turn: this.state.turn === PlayerX ? Player0 : PlayerX,
+      turn: this.props.turn === PlayerX ? Player0 : PlayerX,
       values: newValues,
     });
   }
@@ -89,15 +88,15 @@ class App extends React.Component {
   }
 
   render() {
-    let winner = this.detectWinner(this.state.values);
-    let plays = this.countPlays(this.state.values);
+    let winner = this.detectWinner(this.props.values);
+    let plays = this.countPlays(this.props.values);
     let text = "";
     if (winner) {
       text = `The winner is ${winner}`;
     } else if (plays === 9) {
       text = "Draw! Play again"
     } else {
-      text = `Turn of ${this.state.turn}`;
+      text = `Turn of ${this.props.turn}`;
     }
     return (
       <Container>
@@ -112,8 +111,8 @@ class App extends React.Component {
         </header>
         <section id="TicTacToe">
           <Header text={text} />
-          <Board appClick={this.appClick} disabled={!isNullOrUndefined(winner)} values={this.state.values} />
-          <MovesCounter plays={this.countPlays(this.state.values)} />
+          <Board appClick={this.appClick} disabled={!isNullOrUndefined(winner)} values={this.props.values} />
+          <MovesCounter plays={this.countPlays(this.props.values)} />
           <Menu reset={this.reset} />
         </section>
       </Container>
