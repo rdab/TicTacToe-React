@@ -9,6 +9,7 @@ import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
 import { connect } from "react-redux";
+import { playPosition } from '../redux/actions';
 
 const PlayerX = "Player 1 - Xs";
 const Player0 = "Player 2 - 0s";
@@ -34,12 +35,7 @@ class App extends React.Component {
 
   appClick(row, column) {
     console.log(`Square Click ${row} ${column}`);
-    let newValues = JSON.parse(JSON.stringify(this.props.values));
-    newValues[row][column] = this.props.turn === PlayerX ? 'X' : '0';
-    this.setState({
-      turn: this.props.turn === PlayerX ? Player0 : PlayerX,
-      values: newValues,
-    });
+    this.props.dispatch(playPosition(row, column, this.props.turn));
   }
 
   reset() {
