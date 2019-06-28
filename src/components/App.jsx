@@ -7,6 +7,7 @@ import Header from "./Header";
 import Board  from "./Board";
 import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
+import { isNullOrUndefined } from 'util';
 
 const PlayerX = "Player 1 - Xs";
 const Player0 = "Player 2 - 0s";
@@ -23,7 +24,6 @@ function getNewState(){
 };
 
 function detectWinner(state) {
-  if (state.plays < 5) { return null }
   let winMatrix = [
     [[0, 0], [0, 1], [0, 2]],
     [[1, 0], [1, 1], [1, 2]],
@@ -39,13 +39,16 @@ function detectWinner(state) {
     let values = condition.map((point)=>{
       return state.values[point[0]][point[1]];
     });
-    if (values.some((e) => e === '-')){ return null }
+    if (values.some((val) => val === '-')){ continue }
 
     let val = values.reduce((prev, curr)=>{ 
       return prev === curr ? curr : false;
     });
-    return val === 'X' ? PlayerX : Player0;
+    if (val) {
+      return val === 'X' ? PlayerX : Player0;
+    }
   }
+  return null;
 }
 
 class App extends React.Component {
@@ -82,7 +85,16 @@ class App extends React.Component {
   }
 
   render() {
-    let text = "Turn of " + this.state.turn;
+    let winner = detectWinner(this.state);
+    let plays = this.countPlays(this.state.values);
+    let text = "";
+    if (winner){
+      text = `The winner is ${winner}`;
+    } else if (plays === 9) {
+      text = "Draw! Play again"  
+    }else{
+      text = `Turn of ${this.state.turn}`;
+    }
     return (
       <Container>
         <header className="mt-3 mb-3">
@@ -96,7 +108,7 @@ class App extends React.Component {
         </header>
         <section id="TicTacToe">
           <Header text={text} />
-          <Board appClick={this.appClick} values={this.state.values} />
+          <Board appClick={this.appClick} disabled={!isNullOrUndefined(winner)} values={this.state.values} />
           <MovesCounter plays={this.countPlays(this.state.values)} />
           <Menu reset={this.reset}/>
         </section>

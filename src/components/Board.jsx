@@ -19,6 +19,7 @@ class Board extends React.Component {
         return(
           <Square rowIndex={rowIndex} columnIndex={columnIndex}
             boardClick={this.boardClick}
+            disabled={this.props.disabled}
             key={"".concat(rowIndex, columnIndex)}
             value={value}/>
         );

@@ -16,11 +16,12 @@ class Square extends React.Component {
       this.props.boardClick(row, column);
     }
   }
-  
+
   render() {
+    let disabled = this.props.value !== '-' || this.props.disabled;
     return (
       <button className="btn btn-light" style={squareStyle} 
-        disabled={this.props.value !== '-'}
+        disabled={disabled}
         onClick={()=>this.squareClick(this.props.rowIndex, this.props.columnIndex)} >
           {this.props.value}
       </button>
