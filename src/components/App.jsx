@@ -6,6 +6,7 @@ import '../assets/styles/App.css';
 import Header from "./Header";
 import Board  from "./Board";
 import MovesCounter from "./MovesCounter";
+import Menu from './Menu';
 
 const PlayerX = "Player 1 - Xs";
 const Player0 = "Player 2 - 0s";
@@ -56,6 +57,7 @@ class App extends React.Component {
           <Header text={text} />
           <Board appClick={this.appClick} values={this.state.values} />
           <MovesCounter plays={this.state.plays} />
+          <Menu />
         </section>
       </Container>
     )
