@@ -20,6 +20,7 @@ class Square extends React.Component {
   render() {
     return (
       <button className="btn btn-light" style={squareStyle} 
+        disabled={this.props.value !== '-'}
         onClick={()=>this.squareClick(this.props.rowIndex, this.props.columnIndex)} >
           {this.props.value}
       </button>
