@@ -17,18 +17,18 @@ class Board extends React.Component {
     let board = this.props.values.map((rowValues, rowIndex)=>{
       let row = rowValues.map((value, columnIndex)=>{
         return(
-          <Col className="p-0 m-0" xs="auto">
-            <Square rowIndex={rowIndex} columnIndex={columnIndex}
-              boardClick={this.boardClick}
-              key={"".concat(rowIndex, columnIndex)}
-              value={value}/>
-          </Col>
+          <Square rowIndex={rowIndex} columnIndex={columnIndex}
+            boardClick={this.boardClick}
+            key={"".concat(rowIndex, columnIndex)}
+            value={value}/>
         );
       })
       return(
         <Row className="justify-content-center flex-nowrap"
              key={"row".concat(rowIndex)}>
-          {row}
+          <Col className="p-0 m-0" xs="auto">
+            {row}
+          </Col>
         </Row>
       );
     })
