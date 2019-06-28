@@ -42,7 +42,7 @@ function detectWinner(state) {
     });
     if (values.some((e) => e === '-')){ return null }
 
-    let val = values.filter((prev, curr)=>{ 
+    let val = values.reduce((prev, curr)=>{ 
       return prev === curr ? curr : false;
     });
     return val === 'X' ? PlayerX : Player0;
