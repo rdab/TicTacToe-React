@@ -8,12 +8,14 @@ const squareStyle = {
 class Square extends React.Component {
   constructor(props){
     super(props);
-    this.squareClick = this.squareClick.bind(this);
+    this.handleSquareClick = this.handleSquareClick.bind(this);
   }
 
-  squareClick(row, column){
+  handleSquareClick(){
     if (this.props.value === '-'){
-      this.props.boardClick(row, column);
+      let row = this.props.rowIndex;
+      let col = this.props.columnIndex;
+      this.props.onSquareClick(row, col);
     }
   }
 
@@ -22,7 +24,7 @@ class Square extends React.Component {
     return (
       <button className="btn btn-light" style={squareStyle} 
         disabled={disabled}
-        onClick={()=>this.squareClick(this.props.rowIndex, this.props.columnIndex)} >
+        onClick={this.handleSquareClick} >
           {this.props.value}
       </button>
     );

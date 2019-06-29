@@ -29,11 +29,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.appClick = this.appClick.bind(this);
+    this.handleSquareClick = this.handleSquareClick.bind(this);
     this.reset = this.reset.bind(this);
   }
 
-  appClick(row, column) {
+  handleSquareClick(row, column) {
     console.log(`Square Click ${row} ${column}`);
     this.props.dispatch(playPosition(row, column, this.props.turn));
   }
@@ -107,7 +107,9 @@ class App extends React.Component {
         </header>
         <section id="TicTacToe">
           <Header text={text} />
-          <Board appClick={this.appClick} disabled={!isNullOrUndefined(winner)} values={this.props.values} />
+          <Board onSquareClick={this.handleSquareClick} 
+            disabled={!isNullOrUndefined(winner)} 
+            values={this.props.values} />
           <MovesCounter plays={this.countPlays(this.props.values)} />
           <Menu reset={this.reset} />
         </section>
