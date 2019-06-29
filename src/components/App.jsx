@@ -9,7 +9,7 @@ import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
 import { connect } from "react-redux";
-import { playPosition } from '../redux/actions';
+import { playPosition, restartGame } from '../redux/actions';
 
 const PlayerX = "Player 1 - Xs";
 const Player0 = "Player 2 - 0s";
@@ -39,7 +39,7 @@ class App extends React.Component {
   }
 
   reset() {
-    this.setState(getNewState());
+    this.props.dispatch(restartGame());
   }
 
   countPlays(values) {

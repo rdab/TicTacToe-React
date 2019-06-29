@@ -1,4 +1,4 @@
-import { PLAY_POSITION } from "./actionTypes";
+import { PLAY_POSITION, RESTART_GAME } from "./actionTypes";
 
 export function playPosition(x, y, turn) {
   return {
@@ -6,5 +6,11 @@ export function playPosition(x, y, turn) {
     x: x,
     y: y,
     turn: turn
+  }
+}
+
+export function restartGame() {
+  return {
+    type: RESTART_GAME,
   }
 }

@@ -1,1 +1,2 @@
 export const PLAY_POSITION = "PLAY_POSITION";
+export const RESTART_GAME = "RESTART_GAME";
