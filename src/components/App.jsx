@@ -1,29 +1,18 @@
 import React from 'react';
+import { connect } from "react-redux";
+
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import '../assets/styles/App.css';
 import Header from "./Header";
 import Board from "./Board";
 import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
-import { connect } from "react-redux";
 import { playPosition, restartGame } from '../redux/actions';
+import { PlayerX, Player0 } from "../constants";
 
-const PlayerX = "Player 1 - Xs";
-const Player0 = "Player 2 - 0s";
-
-function getNewState() {
-  return {
-    turn: PlayerX,
-    values: [
-      ["-", "-", "-"],
-      ["-", "-", "-"],
-      ["-", "-", "-"]
-    ],
-  };
-};
+import '../assets/styles/App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -83,9 +72,7 @@ class App extends React.Component {
     return null;
   }
 
-  render() {
-    let winner = this.detectWinner(this.props.values);
-    let plays = this.countPlays(this.props.values);
+  getHeaderText(winner, plays) {
     let text = "";
     if (winner) {
       text = `The winner is ${winner}`;
@@ -94,6 +81,12 @@ class App extends React.Component {
     } else {
       text = `Turn of ${this.props.turn}`;
     }
+    return text;
+  }
+
+  render() {
+    let winner = this.detectWinner(this.props.values);
+    let plays = this.countPlays(this.props.values);
     return (
       <Container>
         <header className="mt-3 mb-3">
@@ -106,9 +99,9 @@ class App extends React.Component {
           </Row>
         </header>
         <section id="TicTacToe">
-          <Header text={text} />
-          <Board onSquareClick={this.handleSquareClick} 
-            disabled={!isNullOrUndefined(winner)} 
+          <Header text={this.getHeaderText(winner, plays)} />
+          <Board onSquareClick={this.handleSquareClick}
+            disabled={!isNullOrUndefined(winner)}
             values={this.props.values} />
           <MovesCounter plays={this.countPlays(this.props.values)} />
           <Menu reset={this.reset} />
