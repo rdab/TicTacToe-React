@@ -4,17 +4,18 @@ import { connect } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+
 import Header from "./Header";
 import Board from "./Board";
 import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
-import { playPosition, restartGame } from '../redux/actions';
-import { PlayerX, Player0 } from "../constants";
+import { playPosition, restartGame } from '../../redux/actions';
+import { PlayerX, Player0 } from "../../constants";
 
-import '../assets/styles/App.css';
+import '../../assets/styles/App.css';
 
-class App extends React.Component {
+class Game extends React.Component {
   constructor(props) {
     super(props);
 
@@ -118,4 +119,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Game);
