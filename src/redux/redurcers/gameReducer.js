@@ -1,5 +1,5 @@
 import { PlayerX, VALUES }  from "../../constants";
-import { PLAY_POSITION } from "../actionTypes";
+import { PLAY_POSITION, RESTART_GAME } from "../actionTypes";
 
 function gameReducer(state = VALUES, action) {
   switch (action.type) {
@@ -8,6 +8,8 @@ function gameReducer(state = VALUES, action) {
       let newValue = action.turn === PlayerX ? "X" : "0";
       newState[action.x][action.y] = newValue;
       return newState;
+    case RESTART_GAME:
+      return VALUES;
     default:
       return state;
   }
