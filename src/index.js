@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
+import Container from "react-bootstrap/Container";
 
 import configureStore, { history } from "./redux/store"
 import Header from "./components/Header";
@@ -19,8 +20,10 @@ const rootElement = document.getElementById('root')
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history} >
-      <Header />
-      <Main />
+      <Container>
+        <Header />
+        <Main />
+      </Container>
     </ConnectedRouter>
   </Provider>,
   rootElement

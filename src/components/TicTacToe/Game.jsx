@@ -1,11 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
-import Header from "./Header";
+import Turn from "./Turn";
 import Board from "./Board";
 import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
@@ -89,25 +85,14 @@ class Game extends React.Component {
     let winner = this.detectWinner(this.props.values);
     let plays = this.countPlays(this.props.values);
     return (
-      <Container>
-        <header className="mt-3 mb-3">
-          <Row className="text-center">
-            <Col>
-              <h1>
-                Welcome to Tic Tac Toe!
-              </h1>
-            </Col>
-          </Row>
-        </header>
-        <section id="TicTacToe">
-          <Header text={this.getHeaderText(winner, plays)} />
-          <Board onSquareClick={this.handleSquareClick}
-            disabled={!isNullOrUndefined(winner)}
-            values={this.props.values} />
-          <MovesCounter plays={this.countPlays(this.props.values)} />
-          <Menu reset={this.reset} />
-        </section>
-      </Container>
+      <section id="TicTacToe">
+        <Turn text={this.getHeaderText(winner, plays)} />
+        <Board onSquareClick={this.handleSquareClick}
+          disabled={!isNullOrUndefined(winner)}
+          values={this.props.values} />
+        <MovesCounter plays={this.countPlays(this.props.values)} />
+        <Menu reset={this.reset} />
+      </section>
     )
   }
 }
