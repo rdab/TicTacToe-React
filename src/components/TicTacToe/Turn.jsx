@@ -5,15 +5,13 @@ import Col from "react-bootstrap/Col";
 class Turn extends React.Component {
   render() {
     return (
-      <header>
-        <Row className="text-center">
-          <Col>
-            <p>
-              {this.props.text}
-            </p>
-          </Col>
-        </Row>
-      </header>
+      <Row className="text-center">
+        <Col>
+          <p>
+            {this.props.text}
+          </p>
+        </Col>
+      </Row>
     );
   }
 }

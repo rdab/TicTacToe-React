@@ -5,13 +5,15 @@ import Col from "react-bootstrap/Col";
 class Header extends React.Component {
   render() {
     return (
-      <Row>
-        <Col>
-          <p>
-            Hello, this is the frontpage
-          </p>
-        </Col>
-      </Row>
+      <section>
+        <Row className="text-center">
+          <Col>
+            <p>
+              Hello, this is the frontpage
+            </p>
+          </Col>
+        </Row>
+      </section>
     );
   }
 }
