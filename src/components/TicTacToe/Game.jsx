@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import Header from "./Header";
+import Turn from "./Turn";
 import Board from "./Board";
 import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
@@ -100,7 +100,7 @@ class Game extends React.Component {
           </Row>
         </header>
         <section id="TicTacToe">
-          <Header text={this.getHeaderText(winner, plays)} />
+          <Turn text={this.getHeaderText(winner, plays)} />
           <Board onSquareClick={this.handleSquareClick}
             disabled={!isNullOrUndefined(winner)}
             values={this.props.values} />
