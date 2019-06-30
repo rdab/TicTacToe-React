@@ -90,15 +90,6 @@ class Game extends React.Component {
     let plays = this.countPlays(this.props.values);
     return (
       <Container>
-        <header className="mt-3 mb-3">
-          <Row className="text-center">
-            <Col>
-              <h1>
-                Welcome to Tic Tac Toe!
-              </h1>
-            </Col>
-          </Row>
-        </header>
         <section id="TicTacToe">
           <Turn text={this.getHeaderText(winner, plays)} />
           <Board onSquareClick={this.handleSquareClick}
