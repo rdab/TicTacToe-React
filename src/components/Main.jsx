@@ -7,7 +7,9 @@ class Main extends React.Component {
   render() {
     return (
       <nav>
-        <Route></Route>
+        <Route exact path='/' component={Home} />
+        <Route path='/new' component={Game} />
+        <Route path='/continue' component={Game} />
       </nav>
     );
   }
