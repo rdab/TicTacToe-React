@@ -88,8 +88,8 @@ class Game extends React.Component {
     } else {
       text = (
         <div>
-        <h3>Welcome {player}</h3>
-        <p>Turn of {this.props.turn}</p>
+          <h3>Welcome {player}</h3>
+          <p>Turn of {this.props.turn}</p>
         </div>
       );
     }
@@ -110,7 +110,7 @@ class Game extends React.Component {
 
     if (this.props.playerName === "") {
       return (
-        <PlayersName submitPlayers={this.onPlayerSubmit}/>
+        <PlayersName submitPlayers={this.onPlayerSubmit} />
       )
     }
     let winner = this.detectWinner(this.props.values);
