@@ -21,9 +21,9 @@ class PlayersName extends React.Component {
 
   render() {
     return (
-      <Row className="justify-content-center flex-nowrap">
-        <Col xs="auto">
-          <Form >
+      <Row className="justify-content-center">
+        <Col sm="auto">
+          <Form>
             <Form.Group as={Row} controlId="formHorizontalPlayer">
               <Form.Label column sm={2}>
                 Player:
