@@ -6,7 +6,7 @@ class PlayersName extends React.Component {
   constructor(props){
     super(props);
     this.state = { 
-      playerName: "",
+      playerName: this.props.currentName,
     }
   } 
 
@@ -16,7 +16,7 @@ class PlayersName extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.submitPlayers(this.state.playerName);
+    this.props.submitPlayerName(this.state.playerName);
   }
 
   render() {

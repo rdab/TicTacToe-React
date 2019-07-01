@@ -6,7 +6,7 @@ import Board from "./Board";
 import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
-import { playPosition, restartGame, fetchState, addPlayers, saveGame } from '../../redux/actions';
+import { playPosition, restartGame, fetchState, newGame, saveGame } from '../../redux/actions';
 import { PlayerX, Player0 } from "../../constants";
 
 import '../../assets/styles/App.css';
@@ -16,12 +16,16 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      isNewGame: true,
+    };
     this.handleSquareClick = this.handleSquareClick.bind(this);
     this.reset = this.reset.bind(this);
   }
 
   componentDidMount() {
     if (this.props.continue) {
+      this.setState({isNewGame: false});
       this.props.dispatch(fetchState());
     } else {
       this.reset();
@@ -34,7 +38,7 @@ class Game extends React.Component {
   }
 
   reset() {
-    this.props.dispatch(restartGame());
+    this.setState({ isNewGame: true })
   }
 
   countPlays(values) {
@@ -95,8 +99,9 @@ class Game extends React.Component {
     return text;
   }
 
-  onPlayerSubmit = (name) => {
-    this.props.dispatch(addPlayers(name));
+  onPlayerSubmit = (playerName) => {
+    this.setState({isNewGame: false});
+    this.props.dispatch(newGame(playerName));
   }
 
   onGameSubmit = (name) => {
@@ -116,9 +121,9 @@ class Game extends React.Component {
       return <h3>Error getting state from server</h3>
     }
 
-    if (this.props.playerName === "") {
+    if (this.state.isNewGame) {
       return (
-        <PlayersName submitPlayers={this.onPlayerSubmit} />
+        <PlayersName currentName={this.props.playerName} submitPlayerName={this.onPlayerSubmit} />
       )
     }
     let winner = this.detectWinner(this.props.values);

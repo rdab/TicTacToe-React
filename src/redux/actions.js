@@ -10,12 +10,6 @@ export function playPosition(x, y, turn) {
   }
 }
 
-export function restartGame() {
-  return {
-    type: actions.RESTART_GAME,
-  }
-}
-
 export function fetchState() {
   return dispatch => {
     dispatch(fetchStateBegin());
@@ -58,9 +52,9 @@ function handleErrors(response) {
   return response;
 }
 
-export function addPlayers(name) {
+export function newGame(name) {
   return {
-    type: actions.ADD_PLAYER,
+    type: actions.NEW_GAME,
     playerName: name,
   }
 }
