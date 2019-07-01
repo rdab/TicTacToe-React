@@ -4,6 +4,7 @@ import turnReducer from "./turnReducer";
 import gameReducer from "./gameReducer";
 import fetchReducer from "./fetchReducer";
 import playerReducer from "./playerReducer";
+import gameNameReducer from "./gameNameReducer";
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -11,4 +12,5 @@ export default (history) => combineReducers({
   values: gameReducer,
   fetch: fetchReducer,
   playerName: playerReducer,
+  gameName: gameNameReducer,
 })

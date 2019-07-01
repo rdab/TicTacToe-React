@@ -10,7 +10,7 @@ class Menu extends React.Component {
     super(props);
     this.state = {
       showForm: false,
-      gameName: "",
+      gameName: this.props.gameName || "",
     };
   }
 
