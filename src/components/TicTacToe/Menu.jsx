@@ -8,7 +8,10 @@ import FormControl from "react-bootstrap/FormControl";
 class Menu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showForm: false };
+    this.state = {
+      showForm: false,
+      gameName: "",
+    };
   }
 
   toggleShowForm = () => {
@@ -18,6 +21,7 @@ class Menu extends React.Component {
 
   handleSubmitName = () => {
     this.toggleShowForm();
+    this.props.submitGame(this.state.gameName);
   }
 
   render() {
@@ -27,12 +31,15 @@ class Menu extends React.Component {
           <Col>
             <InputGroup>
               <FormControl
-                placeholder="Game's username"
-                aria-label="Game's username"
+                placeholder="Game's name"
+                aria-label="Game's name"
                 aria-describedby="basic-addon2"
+                value={this.state.gameName}
+                onChange={(event)=>{ this.setState({gameName: event.target.value})}}
               />
               <InputGroup.Append>
-                <Button variant="primary" onClick={this.handleSubmitName}>
+                <Button variant="primary" onClick={this.handleSubmitName}
+                    disabled={this.state.gameName === ""}>
                   Submit
                 </Button>
                 <Button variant="outline-secondary" onClick={this.toggleShowForm}>
