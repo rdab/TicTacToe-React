@@ -10,5 +10,5 @@ export default (history) => combineReducers({
   turn: turnReducer,
   values: gameReducer,
   fetch: fetchReducer,
-  player_name: playerReducer,
+  playerName: playerReducer,
 })

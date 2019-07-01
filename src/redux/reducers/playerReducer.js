@@ -1,9 +1,9 @@
-import { ADD_PLAYERS, FETCH_STATE_SUCCESS } from "../actionTypes";
+import { ADD_PLAYER, FETCH_STATE_SUCCESS } from "../actionTypes";
 
 function playerReducer(state = "", action) {
   switch (action.type) {
-    case ADD_PLAYERS:
-      return action.player_name;
+    case ADD_PLAYER:
+      return action.playerName;
     case FETCH_STATE_SUCCESS:
       return action.state.player_name ? action.state.player_name: "";
     default:

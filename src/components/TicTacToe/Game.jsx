@@ -96,8 +96,8 @@ class Game extends React.Component {
     return text;
   }
 
-  onPlayerSubmit = (player_name) => {
-    this.props.dispatch(addPlayers(player_name));
+  onPlayerSubmit = (name) => {
+    this.props.dispatch(addPlayers(name));
   }
 
   render() {
@@ -108,7 +108,7 @@ class Game extends React.Component {
       return <h3>Error getting state from server</h3>
     }
 
-    if (this.props.player_name === "") {
+    if (this.props.playerName === "") {
       return (
         <PlayersName submitPlayers={this.onPlayerSubmit}/>
       )
@@ -117,7 +117,7 @@ class Game extends React.Component {
     let plays = this.countPlays(this.props.values);
     return (
       <section id="TicTacToe">
-        <Turn text={this.getHeaderText(this.props.player_name, winner, plays)} />
+        <Turn text={this.getHeaderText(this.props.playerName, winner, plays)} />
         <Board onSquareClick={this.handleSquareClick}
           disabled={!isNullOrUndefined(winner)}
           values={this.props.values} />
@@ -133,7 +133,7 @@ function mapStateToProps(state) {
     values: state.values,
     turn: state.turn,
     fetch: state.fetch,
-    player_name: state.player_name,
+    playerName: state.playerName,
   }
 }
 

@@ -58,9 +58,9 @@ function handleErrors(response) {
   return response;
 }
 
-export function addPlayers(player1) {
+export function addPlayers(name) {
   return {
-    type: actions.ADD_PLAYERS,
-    player_name: player1,
+    type: actions.ADD_PLAYER,
+    playerName: name,
   }
 }
