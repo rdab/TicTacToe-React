@@ -6,7 +6,7 @@ import Board from "./Board";
 import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
-import { playPosition, restartGame, fetchState, addPlayers } from '../../redux/actions';
+import { playPosition, restartGame, fetchState, addPlayers, saveGame } from '../../redux/actions';
 import { PlayerX, Player0 } from "../../constants";
 
 import '../../assets/styles/App.css';
@@ -100,6 +100,10 @@ class Game extends React.Component {
     this.props.dispatch(addPlayers(name));
   }
 
+  onGameSubmit = (name) => {
+    this.props.dispatch(saveGame(name));
+  }
+
   render() {
     if (this.props.fetch.fetching) {
       return <h3>Wait while fetching saved game</h3>
@@ -122,7 +126,7 @@ class Game extends React.Component {
           disabled={!isNullOrUndefined(winner)}
           values={this.props.values} />
         <MovesCounter plays={this.countPlays(this.props.values)} />
-        <Menu reset={this.reset} />
+        <Menu reset={this.reset} submitGame={this.onGameSubmit} />
       </>
     )
   }

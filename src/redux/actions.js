@@ -64,3 +64,11 @@ export function addPlayers(name) {
     playerName: name,
   }
 }
+
+export function saveGame(name) {
+  console.log('Save game action');
+  return {
+    type: 'SAVE_GAME',
+    gameName: name,
+  };
+}
