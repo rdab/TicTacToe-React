@@ -6,7 +6,7 @@ import Board from "./Board";
 import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
-import { playPosition, restartGame, fetchState } from '../../redux/actions';
+import { playPosition, restartGame, fetchState, addPlayers } from '../../redux/actions';
 import { PlayerX, Player0 } from "../../constants";
 
 import '../../assets/styles/App.css';
@@ -92,6 +92,7 @@ class Game extends React.Component {
 
   handlePlayerSubmit = (event) => {
     event.preventDefault();
+    this.props.dispatch(addPlayers(this.state.player1))
   }
 
   handlePlayerInputChange = (event) => {
@@ -106,7 +107,7 @@ class Game extends React.Component {
       return <h3>Error getting state from server</h3>
     }
 
-    if (true) {
+    if (this.props.player_name === "") {
       return (
         <header>
           <form onSubmit={this.handlePlayerSubmit}>
@@ -140,6 +141,7 @@ function mapStateToProps(state) {
     values: state.values,
     turn: state.turn,
     fetch: state.fetch,
+    player_name: state.player_name,
   }
 }
 

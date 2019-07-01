@@ -57,3 +57,10 @@ function handleErrors(response) {
   }
   return response;
 }
+
+export function addPlayers(player1) {
+  return {
+    type: actions.ADD_PLAYERS,
+    player_name: player1,
+  }
+}
