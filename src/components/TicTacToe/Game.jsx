@@ -6,7 +6,7 @@ import Board from "./Board";
 import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
-import { playPosition, restartGame } from '../../redux/actions';
+import { playPosition, restartGame, fetchState } from '../../redux/actions';
 import { PlayerX, Player0 } from "../../constants";
 
 import '../../assets/styles/App.css';
@@ -17,6 +17,12 @@ class Game extends React.Component {
 
     this.handleSquareClick = this.handleSquareClick.bind(this);
     this.reset = this.reset.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.continue) {
+      this.props.dispatch(fetchState());
+    }
   }
 
   handleSquareClick(row, column) {
