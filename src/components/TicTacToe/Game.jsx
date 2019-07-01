@@ -22,6 +22,8 @@ class Game extends React.Component {
   componentDidMount() {
     if (this.props.continue) {
       this.props.dispatch(fetchState());
+    }else {
+      this.reset();
     }
   }
 
