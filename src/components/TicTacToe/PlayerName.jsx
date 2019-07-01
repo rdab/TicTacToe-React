@@ -35,7 +35,10 @@ class PlayersName extends React.Component {
             </Form.Group>
             <Form.Group as={Row}>
               <Col sm={{ span: 9, offset: 3 }}>
-                <Button type="submit" onClick={this.handleSubmit}>Submit</Button>
+                <Button type="submit" onClick={this.handleSubmit}
+                  disabled={this.state.playerName === ""}>
+                  Submit
+                </Button>
               </Col>
             </Form.Group>
           </Form>
