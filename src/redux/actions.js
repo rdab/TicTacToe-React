@@ -46,7 +46,7 @@ export function fetchStateSuccess(json_received) {
 export function fetchStateFailure(error) {
   return {
     type: actions.FETCH_STATE_FAILURE,
-    state: error,
+    error: error,
   }
 }
 
