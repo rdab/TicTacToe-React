@@ -101,7 +101,12 @@ class Game extends React.Component {
   }
 
   onGameSubmit = (name) => {
-    this.props.dispatch(saveGame(name));
+    let data = {
+      values: this.props.values,
+      turn: this.props.turn,
+      player_name: this.props.playerName,
+    }
+    this.props.dispatch(saveGame(name, data));
   }
 
   render() {

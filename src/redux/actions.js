@@ -1,5 +1,5 @@
 import * as actions from "./actionTypes";
-import { API } from "../constants";
+import { API, API_POST, HEADERS } from "../constants";
 
 export function playPosition(x, y, turn) {
   return {
@@ -25,7 +25,7 @@ export function fetchState() {
       .then(json => {
         return dispatch(fetchStateSuccess(json));
       })
-      .catch(error => { 
+      .catch(error => {
         console.log(error);
         return dispatch(fetchStateFailure(error));
       })
@@ -65,10 +65,36 @@ export function addPlayers(name) {
   }
 }
 
-export function saveGame(name) {
-  console.log('Save game action');
-  return {
-    type: 'SAVE_GAME',
-    gameName: name,
-  };
+export function saveGame(name, data) {
+  return dispatch => {
+    dispatch(fetchStateBegin());
+    return postGame(API_POST, data)
+      .then(json => {
+        return dispatch(postStateSuccess(name, json));
+      })
+      .catch(error => {
+        console.log(error);
+        return dispatch(fetchStateFailure(error));
+      })
+  }
+
+  function postStateSuccess(name, json_received) {
+    console.log(`Posted ${json_received}`);
+    return {
+      type: actions.POST_STATE_SUCCESS,
+      uri: json_received,
+      name: name,
+    }
+  }
+}
+
+function postGame(url, data) {
+  return fetch(url, {
+    method: 'POST',
+    mode: 'cors',
+    headers: HEADERS,
+    body: JSON.stringify(data),
+  })
+    .then(handleErrors)
+    .then(response => response.json());
 }
