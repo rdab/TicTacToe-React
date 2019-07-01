@@ -15,6 +15,7 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = { player1: "" };
     this.handleSquareClick = this.handleSquareClick.bind(this);
     this.reset = this.reset.bind(this);
   }
@@ -22,7 +23,7 @@ class Game extends React.Component {
   componentDidMount() {
     if (this.props.continue) {
       this.props.dispatch(fetchState());
-    }else {
+    } else {
       this.reset();
     }
   }
@@ -89,6 +90,14 @@ class Game extends React.Component {
     return text;
   }
 
+  handlePlayerSubmit = (event) => {
+    event.preventDefault();
+  }
+
+  handlePlayerInputChange = (event) => {
+    this.setState({ player1: event.target.value });
+  }
+
   render() {
     if (this.props.fetch.fetching) {
       return <h3>Wait while fetching saved game</h3>
@@ -97,6 +106,20 @@ class Game extends React.Component {
       return <h3>Error getting state from server</h3>
     }
 
+    if (true) {
+      return (
+        <header>
+          <form onSubmit={this.handlePlayerSubmit}>
+            <label htmlFor="playerName">
+              Player 1
+            </label>
+            <input type="text" value={this.state.player1}
+              onChange={this.handlePlayerInputChange} />
+            <input type="submit" value="Submit" />
+          </form>
+        </header>
+      )
+    }
     let winner = this.detectWinner(this.props.values);
     let plays = this.countPlays(this.props.values);
     return (
