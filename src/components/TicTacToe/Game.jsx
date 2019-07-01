@@ -10,6 +10,7 @@ import { playPosition, restartGame, fetchState, addPlayers } from '../../redux/a
 import { PlayerX, Player0 } from "../../constants";
 
 import '../../assets/styles/App.css';
+import PlayersName from './PlayerName';
 
 class Game extends React.Component {
   constructor(props) {
@@ -95,13 +96,8 @@ class Game extends React.Component {
     return text;
   }
 
-  handlePlayerSubmit = (event) => {
-    event.preventDefault();
-    this.props.dispatch(addPlayers(this.state.player1))
-  }
-
-  handlePlayerInputChange = (event) => {
-    this.setState({ player1: event.target.value });
+  onPlayerSubmit = (player_name) => {
+    this.props.dispatch(addPlayers(player_name));
   }
 
   render() {
@@ -114,16 +110,7 @@ class Game extends React.Component {
 
     if (this.props.player_name === "") {
       return (
-        <header>
-          <form onSubmit={this.handlePlayerSubmit}>
-            <label htmlFor="playerName">
-              Player 1
-            </label>
-            <input type="text" value={this.state.player1}
-              onChange={this.handlePlayerInputChange} />
-            <input type="submit" value="Submit" />
-          </form>
-        </header>
+        <PlayersName submitPlayers={this.onPlayerSubmit}/>
       )
     }
     let winner = this.detectWinner(this.props.values);
