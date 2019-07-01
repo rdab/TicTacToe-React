@@ -1,19 +1,20 @@
 import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Jumbotron from "react-bootstrap/Jumbotron";
 
 class Header extends React.Component {
   render() {
     return (
-      <section>
-        <Row className="text-center">
-          <Col>
+      <Row className="text-center">
+        <Col>
+          <Jumbotron>
             <p>
               Hello, this is the frontpage
             </p>
-          </Col>
-        </Row>
-      </section>
+          </Jumbotron>
+        </Col>
+      </Row>
     );
   }
 }

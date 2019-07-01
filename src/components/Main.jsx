@@ -6,7 +6,7 @@ import Home from "./Home";
 class Main extends React.Component {
   render() {
     return (
-      <section>
+      <section className="mt-4">
         <Route exact path='/' component={Home} />
         <Route path='/new' component={Game} />
         <Route path='/continue' component={() => <Game continue="true" />} />

@@ -116,14 +116,14 @@ class Game extends React.Component {
     let winner = this.detectWinner(this.props.values);
     let plays = this.countPlays(this.props.values);
     return (
-      <section id="TicTacToe">
+      <>
         <Turn text={this.getHeaderText(this.props.playerName, winner, plays)} />
         <Board onSquareClick={this.handleSquareClick}
           disabled={!isNullOrUndefined(winner)}
           values={this.props.values} />
         <MovesCounter plays={this.countPlays(this.props.values)} />
         <Menu reset={this.reset} />
-      </section>
+      </>
     )
   }
 }
