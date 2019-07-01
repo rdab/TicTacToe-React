@@ -88,6 +88,13 @@ class Game extends React.Component {
   }
 
   render() {
+    if (this.props.fetch.fetching) {
+      return <h3>Wait while fetching saved game</h3>
+    } else if (!this.props.fetch.fetching && this.props.fetch.error) {
+      console.log(this.props.fetch.error);
+      return <h3>Error getting state from server</h3>
+    }
+
     let winner = this.detectWinner(this.props.values);
     let plays = this.countPlays(this.props.values);
     return (
@@ -107,6 +114,7 @@ function mapStateToProps(state) {
   return {
     values: state.values,
     turn: state.turn,
+    fetch: state.fetch,
   }
 }
 
