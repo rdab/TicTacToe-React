@@ -78,14 +78,19 @@ class Game extends React.Component {
     return null;
   }
 
-  getHeaderText(winner, plays) {
+  getHeaderText(player, winner, plays) {
     let text = "";
     if (winner) {
       text = `The winner is ${winner}`;
     } else if (plays === 9) {
       text = "Draw! Play again"
     } else {
-      text = `Turn of ${this.props.turn}`;
+      text = (
+        <div>
+        <h3>Welcome {player}</h3>
+        <p>Turn of {this.props.turn}</p>
+        </div>
+      );
     }
     return text;
   }
@@ -125,7 +130,7 @@ class Game extends React.Component {
     let plays = this.countPlays(this.props.values);
     return (
       <section id="TicTacToe">
-        <Turn text={this.getHeaderText(winner, plays)} />
+        <Turn text={this.getHeaderText(this.props.player_name, winner, plays)} />
         <Board onSquareClick={this.handleSquareClick}
           disabled={!isNullOrUndefined(winner)}
           values={this.props.values} />

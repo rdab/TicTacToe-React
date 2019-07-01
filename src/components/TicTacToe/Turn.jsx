@@ -7,9 +7,7 @@ class Turn extends React.Component {
     return (
       <Row className="text-center">
         <Col>
-          <p>
-            {this.props.text}
-          </p>
+          {this.props.text}
         </Col>
       </Row>
     );
