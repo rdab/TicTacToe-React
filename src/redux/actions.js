@@ -79,7 +79,6 @@ export function saveGame(name, data) {
   }
 
   function postStateSuccess(name, json_received) {
-    console.log(`Posted ${json_received}`);
     return {
       type: actions.POST_STATE_SUCCESS,
       uri: json_received.uri,

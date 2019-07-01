@@ -16,7 +16,6 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { player1: "" };
     this.handleSquareClick = this.handleSquareClick.bind(this);
     this.reset = this.reset.bind(this);
   }
