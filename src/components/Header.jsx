@@ -11,7 +11,7 @@ class Header extends React.Component {
         <Row className="text-center">
           <Col>
             <h1>Welcome to TicTacToe!</h1>
-            <nav>
+            <nav className="d-flex justify-content-center" >
               <NavLink exact to='/'>Home</NavLink>
               <NavLink exact to='/new'>New Game</NavLink>
               <NavLink exact to='/continue'>Continue</NavLink>
