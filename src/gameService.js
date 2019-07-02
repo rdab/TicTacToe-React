@@ -1,6 +1,6 @@
 import { PlayerX, VALUES } from "./constants";
 
-class TicTacToe {
+export default class TicTacToe {
 
   constructor(player="", turn=PlayerX, values=VALUES,
               name="", uri=""){
