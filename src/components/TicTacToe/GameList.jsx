@@ -4,6 +4,14 @@ import { connect } from "react-redux";
 
 class GameList extends React.Component {
 
+  continueGame = (uri) => {
+    console.log(`continue game ${uri}`);
+  };
+
+  deleteGame = (uri) => {
+    console.log(`delete game ${uri}`);
+  };
+
   render() {
     let games = this.props.games;
     return (
@@ -13,11 +21,17 @@ class GameList extends React.Component {
             { games && games.length
               ? games.map ((game) => {
                   return (
-                    <ListGroup.Item>
+                    <ListGroup.Item key={game.uri}>
                       {game.name}
                       <span>
-                        <Button className="ml-1 mr-1" variant="primary" size="sm">Continue</Button>
-                        <Button className="ml-1 mr-1" variant="danger" size="sm">Delete</Button>
+                        <Button className="ml-1 mr-1" variant="primary" size="sm"
+                            onClick={() => this.continueGame(game.uri)}>
+                          Continue
+                        </Button>
+                        <Button className="ml-1 mr-1" variant="danger" size="sm"
+                            onClick={() => this.deleteGame(game.uri)}>
+                          Delete
+                        </Button>
                       </span>
                     </ListGroup.Item>
                   )
