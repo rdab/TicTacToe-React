@@ -1,5 +1,5 @@
 import { PlayerX, Player0 }  from "../../constants";
-import { PLAY_POSITION, RESTART_GAME, FETCH_STATE_SUCCESS, NEW_GAME } from "../actionTypes";
+import { PLAY_POSITION, FETCH_STATE_SUCCESS, NEW_GAME } from "../actionTypes";
 
 function turnReducer(state = PlayerX, action) {
   switch (action.type) {

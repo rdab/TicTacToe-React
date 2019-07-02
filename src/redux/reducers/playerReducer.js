@@ -1,4 +1,4 @@
-import { FETCH_STATE_SUCCESS, RESTART_GAME, NEW_GAME } from "../actionTypes";
+import { FETCH_STATE_SUCCESS, NEW_GAME } from "../actionTypes";
 
 function playerReducer(state = "", action) {
   switch (action.type) {

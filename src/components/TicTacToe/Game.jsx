@@ -6,7 +6,7 @@ import Board from "./Board";
 import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
-import { playPosition, restartGame, fetchState, newGame, saveGame } from '../../redux/actions';
+import { playPosition, fetchState, newGame, saveGame } from '../../redux/actions';
 import { PlayerX, Player0 } from "../../constants";
 
 import '../../assets/styles/App.css';
