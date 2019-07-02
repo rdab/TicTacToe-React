@@ -1,15 +1,12 @@
 import React from "react";
 import { Button, ListGroup, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
+import { deleteGame } from "../../redux/actions";
 
 class GameList extends React.Component {
 
   continueGame = (uri) => {
     console.log(`continue game ${uri}`);
-  };
-
-  deleteGame = (uri) => {
-    console.log(`delete game ${uri}`);
   };
 
   render() {
@@ -29,7 +26,7 @@ class GameList extends React.Component {
                           Continue
                         </Button>
                         <Button className="ml-1 mr-1" variant="danger" size="sm"
-                            onClick={() => this.deleteGame(game.uri)}>
+                            onClick={() => this.props.deleteGame(game.uri)}>
                           Delete
                         </Button>
                       </span>
@@ -48,4 +45,7 @@ const mapStateToProps = state => {
   return { games: state.games }
 }
 
-export default connect(mapStateToProps)(GameList);
+export default connect(
+  mapStateToProps,
+  { deleteGame }
+)(GameList);

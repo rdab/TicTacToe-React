@@ -1,4 +1,4 @@
-import { POST_STATE_SUCCESS } from "../actionTypes";
+import { POST_STATE_SUCCESS, DELETE_GAME } from "../actionTypes";
 
 const initialState = []
 
@@ -10,6 +10,8 @@ export default function (state = [], action) {
         name: action.name,
         updateDate: new Date(),
       }];
+    case DELETE_GAME:
+      return state.filter(game => game.uri !== action.uri);
     default:
       return state;
   }
