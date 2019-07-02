@@ -5,10 +5,7 @@ export default function (state = [], action) {
   switch (action.type) {
     case NEW_GAME:
       let newGame = new TicTacToe(action.playerName);
-      return {
-        ...state,
-        games: [...state.games, newGame],
-      }
+      return [...state, newGame]
     default:
       return state;
   }
