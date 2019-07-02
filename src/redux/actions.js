@@ -59,6 +59,13 @@ export function newGame(playerName) {
   }
 }
 
+export function deleteGame(uri) {
+  return {
+    type: actions.DELETE_GAME,
+    uri: uri,
+  }
+}
+
 export function saveGame(name, data) {
   return dispatch => {
     dispatch(fetchStateBegin());
