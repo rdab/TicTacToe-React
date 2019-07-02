@@ -1,12 +1,15 @@
 import React from "react";
 import { Button, ListGroup, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
+import { push } from "connected-react-router";
 import { deleteGame } from "../../redux/actions";
 
 class GameList extends React.Component {
 
   continueGame = (uri) => {
     console.log(`continue game ${uri}`);
+    let id = uri.split('/').pop();
+    this.props.push(`/continue/${id}`);
   };
 
   render() {
@@ -47,5 +50,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { deleteGame }
+  { deleteGame, push }
 )(GameList);
