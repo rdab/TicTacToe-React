@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, ListGroup, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import TicTacToe from "../../gameService";
 
 class GameList extends React.Component {
 
