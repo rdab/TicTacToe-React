@@ -1,7 +1,8 @@
 import { PlayerX, VALUES }  from "../../constants";
 import { PLAY_POSITION, FETCH_STATE_SUCCESS, NEW_GAME } from "../actionTypes";
+import TicTacToe from "../../gameService";
 
-function gameReducer(state = VALUES, action) {
+export default function gameReducer(state = VALUES, action) {
   switch (action.type) {
     case NEW_GAME:
       return VALUES;
@@ -17,4 +18,11 @@ function gameReducer(state = VALUES, action) {
   }
 }
 
-export default gameReducer;
+export function gameReducerV2(state=new TicTacToe(), action){
+  switch (action.type) {
+    case NEW_GAME:
+      return new TicTacToe(action.playerName);
+    default:
+      return state
+  }
+}

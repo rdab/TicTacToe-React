@@ -52,10 +52,10 @@ function handleErrors(response) {
   return response;
 }
 
-export function newGame(name) {
+export function newGame(playerName) {
   return {
     type: actions.NEW_GAME,
-    playerName: name,
+    playerName: playerName,
   }
 }
 
