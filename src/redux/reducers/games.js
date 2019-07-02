@@ -1,11 +1,7 @@
 import { NEW_GAME } from "../actionTypes";
 import TicTacToe from "../../gameService";
 
-const initialState = {
-  games: []
-};
-
-export default function (state = initialState, action) {
+export default function (state = [], action) {
   switch (action.type) {
     case NEW_GAME:
       let newGame = new TicTacToe(action.playerName);
