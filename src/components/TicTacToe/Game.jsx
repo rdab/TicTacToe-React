@@ -7,7 +7,7 @@ import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
 import { playPosition, fetchState, newGame, saveGame } from '../../redux/actions';
-import { PlayerX, Player0 } from "../../constants";
+import { PlayerX, Player0, PATH } from "../../constants";
 
 import '../../assets/styles/App.css';
 import PlayersName from './PlayerName';
@@ -24,11 +24,16 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.continue) {
-      this.setState({isNewGame: false});
-      this.props.dispatch(fetchState());
-    } else {
+    let { pathname } = this.props.location;
+    console.log(pathname === PATH.new)
+    if (pathname === PATH.new){
       this.reset();
+    } else {
+      let { id } = this.props.match.params;
+      id = id ? id : "";
+      console.log(`id is ${id}`);
+      this.setState({ isNewGame: false });
+      this.props.dispatch(fetchState());
     }
   }
 
@@ -100,7 +105,7 @@ class Game extends React.Component {
   }
 
   onPlayerSubmit = (playerName) => {
-    this.setState({isNewGame: false});
+    this.setState({ isNewGame: false });
     this.props.dispatch(newGame(playerName));
   }
 
