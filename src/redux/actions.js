@@ -68,7 +68,20 @@ export function deleteGame(uri) {
   }
 }
 
-export function saveGame(name, data) {
+export function saveGame(name, data, uri) {
+  if (uri) {
+    return dispatch => {
+      dispatch(fetchStateBegin());
+      return putGame(uri, data)
+        .then(json => {
+          return dispatch(putStateSuccess(name, json));
+        })
+        .catch(error => {
+          console.log(error);
+          return dispatch(fetchStateFailure(error));
+        })
+    }
+  }
   return dispatch => {
     dispatch(fetchStateBegin());
     return postGame(API_POST, data)
@@ -93,6 +106,23 @@ function postStateSuccess(name, json_received) {
 function postGame(url, data) {
   return fetch(url, {
     method: 'POST',
+    mode: 'cors',
+    headers: HEADERS,
+    body: JSON.stringify(data),
+  })
+    .then(handleErrors)
+    .then(response => response.json());
+}
+
+function putStateSuccess(name, response) {
+  return {
+    type: actions.PUT_STATE_SUCCESS
+  }
+}
+
+function putGame(url, data) {
+  return fetch(url, {
+    method: 'PUT',
     mode: 'cors',
     headers: HEADERS,
     body: JSON.stringify(data),

@@ -115,7 +115,8 @@ class Game extends React.Component {
       turn: this.props.currentGame.turn,
       player_name: this.props.currentGame.player,
     }
-    this.props.dispatch(saveGame(name, data));
+    let uri = this.props.currentGame.uri;
+    this.props.dispatch(saveGame(name, data, uri));
   }
 
   render() {
