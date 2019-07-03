@@ -26,7 +26,6 @@ class Game extends React.Component {
 
   componentDidMount() {
     let { pathname } = this.props.location;
-    console.log(pathname === PATH.new)
     if (pathname === PATH.new){
       this.reset();
     } else {  // Load existing game

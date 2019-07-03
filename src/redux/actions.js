@@ -1,5 +1,5 @@
 import * as actions from "./actionTypes";
-import { API, API_POST, HEADERS } from "../constants";
+import { API, API_POST, HEADERS, makeURI } from "../constants";
 
 export function playPosition(x, y, turn) {
   return {
@@ -10,10 +10,12 @@ export function playPosition(x, y, turn) {
   }
 }
 
-export function fetchState() {
+export function fetchState(id) {
+  let uri = makeURI(id);
   return dispatch => {
     dispatch(fetchStateBegin());
-    return fetch(API)
+    console.log(`let fetch ${uri}`);
+    return fetch(uri)
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
