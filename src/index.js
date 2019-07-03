@@ -12,8 +12,8 @@ import { VALUES, PlayerX } from './constants';
 import './assets/styles/index.css';
 
 const store = configureStore({
-  values: VALUES,
-  turn: PlayerX,
+  game: {},
+  games: []
 })
 
 const rootElement = document.getElementById('root')
