@@ -17,7 +17,17 @@ export default function gameReducer(state = VALUES, action) {
   }
 }
 
-export function gameReducerV2(state = {}, action) {
+
+const initialState = {
+  player: "",
+  turn: PlayerX,
+  values: VALUES,
+  name: "",
+  uri: null,
+  updatedDate: null,
+}
+
+export function gameReducerV2(state = initialState, action) {
   switch (action.type) {
     case NEW_GAME:
     default:
