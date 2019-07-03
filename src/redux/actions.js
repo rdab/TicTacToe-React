@@ -1,5 +1,5 @@
 import * as actions from "./actionTypes";
-import { API, API_POST, HEADERS } from "../constants";
+import { API_POST, HEADERS, makeURI } from "../constants";
 
 export function playPosition(x, y, turn) {
   return {
@@ -10,10 +10,12 @@ export function playPosition(x, y, turn) {
   }
 }
 
-export function fetchState() {
+export function fetchState(id) {
+  let uri = makeURI(id);
   return dispatch => {
     dispatch(fetchStateBegin());
-    return fetch(API)
+    console.log(`let fetch ${uri}`);
+    return fetch(uri)
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
@@ -52,10 +54,17 @@ function handleErrors(response) {
   return response;
 }
 
-export function newGame(name) {
+export function newGame(playerName) {
   return {
     type: actions.NEW_GAME,
-    playerName: name,
+    playerName: playerName,
+  }
+}
+
+export function deleteGame(uri) {
+  return {
+    type: actions.DELETE_GAME,
+    uri: uri,
   }
 }
 
@@ -71,13 +80,13 @@ export function saveGame(name, data) {
         return dispatch(fetchStateFailure(error));
       })
   }
+}
 
-  function postStateSuccess(name, json_received) {
-    return {
-      type: actions.POST_STATE_SUCCESS,
-      uri: json_received.uri,
-      name: name,
-    }
+function postStateSuccess(name, json_received) {
+  return {
+    type: actions.POST_STATE_SUCCESS,
+    uri: json_received.uri,
+    name: name,
   }
 }
 

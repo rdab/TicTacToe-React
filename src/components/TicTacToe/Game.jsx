@@ -7,10 +7,11 @@ import MovesCounter from "./MovesCounter";
 import Menu from './Menu';
 import { isNullOrUndefined } from 'util';
 import { playPosition, fetchState, newGame, saveGame } from '../../redux/actions';
-import { PlayerX, Player0 } from "../../constants";
+import { PlayerX, Player0, PATH } from "../../constants";
 
 import '../../assets/styles/App.css';
 import PlayersName from './PlayerName';
+import { getLastGameId } from '../../redux/selectors';
 
 class Game extends React.Component {
   constructor(props) {
@@ -24,17 +25,21 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.continue) {
-      this.setState({isNewGame: false});
-      this.props.dispatch(fetchState());
-    } else {
+    let { pathname } = this.props.location;
+    if (pathname === PATH.new){
       this.reset();
+    } else {  // Load existing game
+      let { id } = this.props.match.params;
+      id = id ? id : this.props.lastGame;
+      console.log(`id is ${id}`);
+      this.setState({ isNewGame: false });
+      this.props.dispatch(fetchState(id));
     }
   }
 
   handleSquareClick(row, column) {
     console.log(`Square Click ${row} ${column}`);
-    this.props.dispatch(playPosition(row, column, this.props.turn));
+    this.props.dispatch(playPosition(row, column, this.props.currentGame.turn));
   }
 
   reset() {
@@ -92,7 +97,7 @@ class Game extends React.Component {
       text = (
         <div>
           <h3>Welcome {player}</h3>
-          <p>Turn of {this.props.turn}</p>
+          <p>Turn of {this.props.currentGame.turn}</p>
         </div>
       );
     }
@@ -100,15 +105,15 @@ class Game extends React.Component {
   }
 
   onPlayerSubmit = (playerName) => {
-    this.setState({isNewGame: false});
+    this.setState({ isNewGame: false });
     this.props.dispatch(newGame(playerName));
   }
 
   onGameSubmit = (name) => {
     let data = {
-      values: this.props.values,
-      turn: this.props.turn,
-      player_name: this.props.playerName,
+      values: this.props.currentGame.values,
+      turn: this.props.currentGame.turn,
+      player_name: this.props.currentGame.player,
     }
     this.props.dispatch(saveGame(name, data));
   }
@@ -123,19 +128,21 @@ class Game extends React.Component {
 
     if (this.state.isNewGame) {
       return (
-        <PlayersName currentName={this.props.playerName} submitPlayerName={this.onPlayerSubmit} />
+        <PlayersName currentName={this.props.currentGame.player} 
+            submitPlayerName={this.onPlayerSubmit} />
       )
     }
-    let winner = this.detectWinner(this.props.values);
-    let plays = this.countPlays(this.props.values);
+    let winner = this.detectWinner(this.props.currentGame.values);
+    let plays = this.countPlays(this.props.currentGame.values);
     return (
       <>
-        <Turn text={this.getHeaderText(this.props.playerName, winner, plays)} />
+        <Turn text={this.getHeaderText(this.props.currentGame.player, winner, plays)} />
         <Board onSquareClick={this.handleSquareClick}
           disabled={!isNullOrUndefined(winner)}
-          values={this.props.values} />
-        <MovesCounter plays={this.countPlays(this.props.values)} />
-        <Menu gameName={this.props.gameName} reset={this.reset} submitGame={this.onGameSubmit} />
+          values={this.props.currentGame.values} />
+        <MovesCounter plays={this.countPlays(this.props.currentGame.values)} />
+        <Menu gameName={this.props.currentGame.name}
+            reset={this.reset} submitGame={this.onGameSubmit} />
       </>
     )
   }
@@ -143,11 +150,9 @@ class Game extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    values: state.values,
-    turn: state.turn,
     fetch: state.fetch,
-    playerName: state.playerName,
-    gameName: state.gameName,
+    currentGame: state.game,
+    lastGame: getLastGameId(state),
   }
 }
 

@@ -17,5 +17,13 @@ export const HEADERS = {
   'Content-Type': 'application/json',
 }
 
-export const API = "https://api.myjson.com/bins/i216a";
+export const DEFAULT_ID = "i216a";
 export const API_POST = "https://api.myjson.com/bins";
+export const makeURI = (id) => `${API_POST}/${id}`;
+
+export const PATH = {
+  home: "/",
+  new: "/new",
+  continue: "/continue",
+  games: "/games"
+}
