@@ -30,7 +30,7 @@ export default function gameReducerV2(state = initialState, action) {
         uri: action.uri,
       }
     case PLAY_POSITION:
-      let newState = JSON.parse(JSON.stringify(state.matrix));
+      let newState = JSON.parse(JSON.stringify(state.values));
       let newValue = action.turn === PlayerX ? "X" : "0";
       newState[action.x][action.y] = newValue;
       return {
