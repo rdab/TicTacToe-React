@@ -34,6 +34,8 @@ export function gameReducerV2(state = initialState, action) {
         ...initialState,
         player: action.playerName,
       }
+    case FETCH_STATE_SUCCESS:
+      return action.state.player_name ? action.state.player_name: "";
     default:
       return state;
   }
