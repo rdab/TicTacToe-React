@@ -80,13 +80,13 @@ export function saveGame(name, data) {
         return dispatch(fetchStateFailure(error));
       })
   }
+}
 
-  function postStateSuccess(name, json_received) {
-    return {
-      type: actions.POST_STATE_SUCCESS,
-      uri: json_received.uri,
-      name: name,
-    }
+function postStateSuccess(name, json_received) {
+  return {
+    type: actions.POST_STATE_SUCCESS,
+    uri: json_received.uri,
+    name: name,
   }
 }
 
