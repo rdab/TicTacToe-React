@@ -11,6 +11,7 @@ import { PlayerX, Player0, PATH } from "../../constants";
 
 import '../../assets/styles/App.css';
 import PlayersName from './PlayerName';
+import { getLastGameURI } from '../../redux/selectors';
 
 class Game extends React.Component {
   constructor(props) {
@@ -153,6 +154,7 @@ function mapStateToProps(state) {
     fetch: state.fetch,
     playerName: state.playerName,
     gameName: state.gameName,
+    lastGame: getLastGameURI(state),
   }
 }
 
