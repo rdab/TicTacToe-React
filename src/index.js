@@ -10,11 +10,7 @@ import Main from "./components/Main";
 
 import './assets/styles/index.css';
 
-const store = configureStore({
-  game: {},
-  games: [],
-  fetch: {},
-})
+const store = configureStore({})
 
 const rootElement = document.getElementById('root')
 ReactDOM.render(

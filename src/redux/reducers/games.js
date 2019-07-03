@@ -12,11 +12,13 @@ export default function (state = [], action) {
       let game = {
         ...state.find(item => item.uri === action.uri),
         name: action.name,
+        uri: action.uri,
         updateDate: new Date(),
       }
       let newlist = [
-        ...state.filter(item => item.uri !== action.uri)
-      ].push(game);
+        ...state.filter(item => item.uri !== action.uri),
+        game
+      ];
       return newlist;
     case DELETE_GAME:
       return state.filter(game => game.uri !== action.uri);
