@@ -141,7 +141,8 @@ class Game extends React.Component {
           disabled={!isNullOrUndefined(winner)}
           values={this.props.values} />
         <MovesCounter plays={this.countPlays(this.props.values)} />
-        <Menu gameName={this.props.gameName} reset={this.reset} submitGame={this.onGameSubmit} />
+        <Menu gameName={this.props.currentGame.name}
+            reset={this.reset} submitGame={this.onGameSubmit} />
       </>
     )
   }
@@ -151,7 +152,6 @@ function mapStateToProps(state) {
   return {
     values: state.values,
     fetch: state.fetch,
-    gameName: state.gameName,
     currentGame: state.game,
     lastGame: getLastGameId(state),
   }

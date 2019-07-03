@@ -1,5 +1,5 @@
 import { PlayerX, Player0, VALUES } from "../../constants";
-import { PLAY_POSITION, FETCH_STATE_SUCCESS, NEW_GAME } from "../actionTypes";
+import { PLAY_POSITION, FETCH_STATE_SUCCESS, POST_STATE_SUCCESS, NEW_GAME } from "../actionTypes";
 
 export default function gameReducer(state = VALUES, action) {
   switch (action.type) {
@@ -39,6 +39,12 @@ export function gameReducerV2(state = initialState, action) {
         ...state,
         player: action.state.player_name ? action.state.player_name: "",
         turn: action.state.turn,
+      }
+    case POST_STATE_SUCCESS:
+      return {
+        ...state,
+        name: action.name,
+        uri: action.uri,
       }
     case PLAY_POSITION:
       return {
