@@ -16,5 +16,6 @@ export default (history) => combineReducers({
   playerName: playerReducer,
   gameName: gameNameReducer,
   uri: uriReducer,
+  game: gameReducerV2,
   games: gameListReducer,
 })
