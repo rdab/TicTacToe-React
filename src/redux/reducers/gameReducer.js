@@ -30,6 +30,10 @@ const initialState = {
 export function gameReducerV2(state = initialState, action) {
   switch (action.type) {
     case NEW_GAME:
+      return {
+        ...initialState,
+        player: action.playerName,
+      }
     default:
       return state;
   }
