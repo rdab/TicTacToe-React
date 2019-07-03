@@ -1,4 +1,4 @@
-import { PlayerX, VALUES } from "../../constants";
+import { PlayerX, Player0, VALUES } from "../../constants";
 import { PLAY_POSITION, FETCH_STATE_SUCCESS, NEW_GAME } from "../actionTypes";
 
 export default function gameReducer(state = VALUES, action) {
@@ -35,7 +35,16 @@ export function gameReducerV2(state = initialState, action) {
         player: action.playerName,
       }
     case FETCH_STATE_SUCCESS:
-      return action.state.player_name ? action.state.player_name: "";
+      return {
+        ...state,
+        player: action.state.player_name ? action.state.player_name: "",
+        turn: action.state.turn,
+      }
+    case PLAY_POSITION:
+      return {
+        ...state,
+        turn: action.turn === PlayerX ? Player0 : PlayerX,
+      }
     default:
       return state;
   }

@@ -39,7 +39,7 @@ class Game extends React.Component {
 
   handleSquareClick(row, column) {
     console.log(`Square Click ${row} ${column}`);
-    this.props.dispatch(playPosition(row, column, this.props.turn));
+    this.props.dispatch(playPosition(row, column, this.props.currentGame.turn));
   }
 
   reset() {
@@ -97,7 +97,7 @@ class Game extends React.Component {
       text = (
         <div>
           <h3>Welcome {player}</h3>
-          <p>Turn of {this.props.turn}</p>
+          <p>Turn of {this.props.currentGame.turn}</p>
         </div>
       );
     }
@@ -112,7 +112,7 @@ class Game extends React.Component {
   onGameSubmit = (name) => {
     let data = {
       values: this.props.values,
-      turn: this.props.turn,
+      turn: this.props.currentGame.turn,
       player_name: this.props.currentGame.player,
     }
     this.props.dispatch(saveGame(name, data));
@@ -150,7 +150,6 @@ class Game extends React.Component {
 function mapStateToProps(state) {
   return {
     values: state.values,
-    turn: state.turn,
     fetch: state.fetch,
     gameName: state.gameName,
     currentGame: state.game,
