@@ -113,7 +113,7 @@ class Game extends React.Component {
     let data = {
       values: this.props.values,
       turn: this.props.turn,
-      player_name: this.props.playerName,
+      player_name: this.props.currentGame.player,
     }
     this.props.dispatch(saveGame(name, data));
   }
@@ -128,14 +128,15 @@ class Game extends React.Component {
 
     if (this.state.isNewGame) {
       return (
-        <PlayersName currentName={this.props.playerName} submitPlayerName={this.onPlayerSubmit} />
+        <PlayersName currentName={this.props.currentGame.player} 
+            submitPlayerName={this.onPlayerSubmit} />
       )
     }
     let winner = this.detectWinner(this.props.values);
     let plays = this.countPlays(this.props.values);
     return (
       <>
-        <Turn text={this.getHeaderText(this.props.playerName, winner, plays)} />
+        <Turn text={this.getHeaderText(this.props.currentGame.player, winner, plays)} />
         <Board onSquareClick={this.handleSquareClick}
           disabled={!isNullOrUndefined(winner)}
           values={this.props.values} />
@@ -151,7 +152,6 @@ function mapStateToProps(state) {
     values: state.values,
     turn: state.turn,
     fetch: state.fetch,
-    playerName: state.playerName,
     gameName: state.gameName,
     currentGame: state.game,
     lastGame: getLastGameId(state),
