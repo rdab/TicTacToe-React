@@ -6,3 +6,8 @@ export const getLastGameURI = (store) => {
     return acc.updateDate > current.updateDate ? acc : current;
   });
 }
+
+export const getLastGameId = (store) => {
+  let lastGame = getLastGameURI(store);
+  return lastGame.split('/').pop();
+}

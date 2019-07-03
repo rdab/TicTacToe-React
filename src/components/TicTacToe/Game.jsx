@@ -11,7 +11,7 @@ import { PlayerX, Player0, PATH } from "../../constants";
 
 import '../../assets/styles/App.css';
 import PlayersName from './PlayerName';
-import { getLastGameURI } from '../../redux/selectors';
+import { getLastGameId } from '../../redux/selectors';
 
 class Game extends React.Component {
   constructor(props) {
@@ -29,12 +29,12 @@ class Game extends React.Component {
     console.log(pathname === PATH.new)
     if (pathname === PATH.new){
       this.reset();
-    } else {
+    } else {  // Load existing game
       let { id } = this.props.match.params;
-      id = id ? id : "";
+      id = id ? id : this.props.lastGame;
       console.log(`id is ${id}`);
       this.setState({ isNewGame: false });
-      this.props.dispatch(fetchState());
+      this.props.dispatch(fetchState(id));
     }
   }
 
@@ -154,7 +154,7 @@ function mapStateToProps(state) {
     fetch: state.fetch,
     playerName: state.playerName,
     gameName: state.gameName,
-    lastGame: getLastGameURI(state),
+    lastGame: getLastGameId(state),
   }
 }
 
