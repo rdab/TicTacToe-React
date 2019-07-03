@@ -153,6 +153,7 @@ function mapStateToProps(state) {
     fetch: state.fetch,
     playerName: state.playerName,
     gameName: state.gameName,
+    currentGame: state.game,
     lastGame: getLastGameId(state),
   }
 }
