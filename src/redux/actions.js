@@ -1,5 +1,5 @@
 import * as actions from "./actionTypes";
-import { API, API_POST, HEADERS, makeURI } from "../constants";
+import { API_POST, HEADERS, makeURI } from "../constants";
 
 export function playPosition(x, y, turn) {
   return {

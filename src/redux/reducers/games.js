@@ -1,7 +1,5 @@
 import { POST_STATE_SUCCESS, DELETE_GAME } from "../actionTypes";
 
-const initialState = []
-
 export default function (state = [], action) {
   switch (action.type) {
     case POST_STATE_SUCCESS:

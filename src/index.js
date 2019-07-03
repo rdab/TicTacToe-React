@@ -7,7 +7,6 @@ import Container from "react-bootstrap/Container";
 import configureStore, { history } from "./redux/store"
 import Header from "./components/Header";
 import Main from "./components/Main";
-import { VALUES, PlayerX } from './constants';
 
 import './assets/styles/index.css';
 
