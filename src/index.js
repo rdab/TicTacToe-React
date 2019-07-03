@@ -12,7 +12,8 @@ import './assets/styles/index.css';
 
 const store = configureStore({
   game: {},
-  games: []
+  games: [],
+  fetch: {},
 })
 
 const rootElement = document.getElementById('root')

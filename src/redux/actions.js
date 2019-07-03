@@ -74,7 +74,7 @@ export function saveGame(name, data, uri) {
       dispatch(fetchStateBegin());
       return putGame(uri, data)
         .then(json => {
-          return dispatch(putStateSuccess(name, json));
+          return dispatch(putStateSuccess(uri, name, json));
         })
         .catch(error => {
           console.log(error);
@@ -114,9 +114,11 @@ function postGame(url, data) {
     .then(response => response.json());
 }
 
-function putStateSuccess(name, response) {
+function putStateSuccess(uri, name, response) {
   return {
-    type: actions.PUT_STATE_SUCCESS
+    type: actions.PUT_STATE_SUCCESS,
+    uri: uri,
+    name: name,
   }
 }
 
