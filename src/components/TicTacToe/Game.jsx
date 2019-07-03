@@ -111,7 +111,7 @@ class Game extends React.Component {
 
   onGameSubmit = (name) => {
     let data = {
-      values: this.props.values,
+      values: this.props.currentGame.values,
       turn: this.props.currentGame.turn,
       player_name: this.props.currentGame.player,
     }
@@ -132,15 +132,15 @@ class Game extends React.Component {
             submitPlayerName={this.onPlayerSubmit} />
       )
     }
-    let winner = this.detectWinner(this.props.values);
-    let plays = this.countPlays(this.props.values);
+    let winner = this.detectWinner(this.props.currentGame.values);
+    let plays = this.countPlays(this.props.currentGame.values);
     return (
       <>
         <Turn text={this.getHeaderText(this.props.currentGame.player, winner, plays)} />
         <Board onSquareClick={this.handleSquareClick}
           disabled={!isNullOrUndefined(winner)}
-          values={this.props.values} />
-        <MovesCounter plays={this.countPlays(this.props.values)} />
+          values={this.props.currentGame.values} />
+        <MovesCounter plays={this.countPlays(this.props.currentGame.values)} />
         <Menu gameName={this.props.currentGame.name}
             reset={this.reset} submitGame={this.onGameSubmit} />
       </>
@@ -150,7 +150,6 @@ class Game extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    values: state.values,
     fetch: state.fetch,
     currentGame: state.game,
     lastGame: getLastGameId(state),

@@ -1,33 +1,15 @@
 import { PlayerX, Player0, VALUES } from "../../constants";
 import { PLAY_POSITION, FETCH_STATE_SUCCESS, POST_STATE_SUCCESS, NEW_GAME } from "../actionTypes";
 
-export default function gameReducer(state = VALUES, action) {
-  switch (action.type) {
-    case NEW_GAME:
-      return VALUES;
-    case PLAY_POSITION:
-      let newState = JSON.parse(JSON.stringify(state));
-      let newValue = action.turn === PlayerX ? "X" : "0";
-      newState[action.x][action.y] = newValue;
-      return newState;
-    case FETCH_STATE_SUCCESS:
-      return action.state.values;
-    default:
-      return state;
-  }
-}
-
-
 const initialState = {
   player: "",
   turn: PlayerX,
   values: VALUES,
   name: "",
   uri: null,
-  updatedDate: null,
 }
 
-export function gameReducerV2(state = initialState, action) {
+export default function gameReducerV2(state = initialState, action) {
   switch (action.type) {
     case NEW_GAME:
       return {
@@ -36,9 +18,10 @@ export function gameReducerV2(state = initialState, action) {
       }
     case FETCH_STATE_SUCCESS:
       return {
-        ...state,
+        ...initialState,
         player: action.state.player_name ? action.state.player_name: "",
         turn: action.state.turn,
+        values: action.state.values,
       }
     case POST_STATE_SUCCESS:
       return {
@@ -47,9 +30,13 @@ export function gameReducerV2(state = initialState, action) {
         uri: action.uri,
       }
     case PLAY_POSITION:
+      let newState = JSON.parse(JSON.stringify(state.matrix));
+      let newValue = action.turn === PlayerX ? "X" : "0";
+      newState[action.x][action.y] = newValue;
       return {
         ...state,
         turn: action.turn === PlayerX ? Player0 : PlayerX,
+        values: newState,
       }
     default:
       return state;
